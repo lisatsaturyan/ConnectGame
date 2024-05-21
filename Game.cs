@@ -17,34 +17,29 @@ namespace ConnectGame
 
         public Game(string player1Name, string player2Name)
         {
-            Player1 = new Player(player1Name);
-            Player2 = new Player(player2Name);
+            Player1 = new Player(player1Name, 'X');
+            Player2 = new Player(player2Name, 'O');
             Board = new Board(9, 9);
-            CurrentPlayer = new Random().Next(2) == 0 ? Player1 : Player2;
+
+            // Randomly choose the starting player
+            var random = new Random();
+            CurrentPlayer = random.Next(2) == 0 ? Player1 : Player2;
         }
 
         public void PlayTurn(int column)
         {
-            if (Winner != null)
-                throw new InvalidOperationException("Game is already won.");
-
             Board.DropToken(column, CurrentPlayer);
-            if (CheckWin(CurrentPlayer))
+
+            // Check if the current player has won the game
+            if (Board.CheckForWin(CurrentPlayer))
             {
                 Winner = CurrentPlayer;
+                return;
             }
-            else
-            {
-                CurrentPlayer = CurrentPlayer == Player1 ? Player2 : Player1;
-            }
-        }
 
-        private bool CheckWin(Player player)
-        {
-            // Check for winning conditions (4 in a row, column, or diagonal)
-            // This method needs a detailed implementation.
-            // Placeholder for now, returning false always.
-            return false;
+            // Switch to the other player
+            CurrentPlayer = CurrentPlayer == Player1 ? Player2 : Player1;
         }
     }
 }
+

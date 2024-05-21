@@ -1,4 +1,5 @@
 ﻿using ConnectGame;
+using System;
 
 Console.WriteLine("Please Player1 Enter your Name:");
 string player1Name = Console.ReadLine();
@@ -13,7 +14,9 @@ Console.WriteLine($"The player who starts the game is {game.CurrentPlayer.Name}.
 
 while (game.Winner == null)
 {
+    game.Board.PrintBoard();
     Console.WriteLine($"{game.CurrentPlayer.Name}, choose column? (0-8)");
+
     if (int.TryParse(Console.ReadLine(), out int column) && column >= 0 && column < 9)
     {
         try
@@ -31,4 +34,5 @@ while (game.Winner == null)
     }
 }
 
+game.Board.PrintBoard();
 Console.WriteLine($"Congratulations {game.Winner.Name}, you won the game!");
