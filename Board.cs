@@ -141,5 +141,22 @@ namespace ConnectGame
 
             return false;
         }
+
+        public bool IsColumnValid(int column)
+        {
+            return column >= 0 && column < Columns && grid[0, column] == null;
+        }
+
+        public bool IsBoardFull()
+        {
+            for (int col = 0; col < Columns; col++)
+            {
+                if (grid[0, col] == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

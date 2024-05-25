@@ -15,7 +15,7 @@ namespace ConnectGame
         public Player Winner { get; private set; }
         public Board Board { get; }
 
-        public Game(string player1Name, string player2Name)
+        public Game(string player1Name, string player2Name, int rows, int columns)
         {
             Player1 = new Player(player1Name, 'X');
             Player2 = new Player(player2Name, 'O');
